@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>My JSON API</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
+  </head>
+  <body>
+    <script>
+      var data = JSON.parse(document.getElementById("data").textContent);
+      console.log(data);
+    </script>
+    <script>
+  var request = new Request("https://api.github.com/repos/celinecode/jsonfotos/contents/data.json");
+  request.headers.set("Accept", "application/json");
+  fetch(request).then(function(response) {
+    if (response.ok) {
+      response.json().then(function(data) {
+        document.getElementById("data").textContent = JSON.stringify(data, null, 2);
+      });
+    } else {
+      console.log("Error fetching data: " + response.statusText);
+    }
+  });
+</script>
+    <pre id="data"></pre>
+  </body>
+</html>
